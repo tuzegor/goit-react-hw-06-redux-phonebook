@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import ContactForm from './components/ContactForm/ContactForm';
-import Filter from './components/Filter';
-import ContactList from './components/ContactList';
+import Filter from './components/Filter/Filter';
+import ContactList from './components/ContactList/ContactList';
 
 import { setState } from './store/contacts/items-slice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,8 +11,7 @@ export default function App() {
   const contacts = useSelector(state => state.contacts.items);
 
   //---- проветка стейта
-  const states = useSelector(state => state);
-  console.log(states);
+  console.log(useSelector(state => state));
   // ---
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import style from './Filter.module.css';
 import { changeFilter } from '../../store/contacts/filter-slice';
 import { useDispatch, useSelector } from 'react-redux';
 
-function Filter() {
+export default function Filter() {
   const dispatch = useDispatch();
   const filter = useSelector(state => state.contacts.filter);
   return (
@@ -21,4 +21,3 @@ function Filter() {
     </div>
   );
 }
-export default Filter;

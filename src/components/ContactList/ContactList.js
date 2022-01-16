@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import style from './ContactList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeContact } from '../../store/contacts/items-slice';
 
-function ContactList() {
+export default function ContactList() {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.contacts.filter);
@@ -34,9 +33,3 @@ function ContactList() {
     </ul>
   );
 }
-
-ContactList.propTypes = {
-  showFilteredContacts: PropTypes.func,
-};
-
-export default ContactList;
