@@ -7,10 +7,13 @@ import { setState } from './store/contacts/items-slice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function App() {
-  const [filter, setFilter] = useState('');
-
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.items);
+
+  //---- проветка стейта
+  const states = useSelector(state => state);
+  console.log(states);
+  // ---
 
   useEffect(() => {
     const contactsFromStorage = JSON.parse(
@@ -25,20 +28,13 @@ export default function App() {
     localStorage.setItem('contactsStorage', JSON.stringify(contacts));
   }, [contacts]);
 
-  const showFilteredContacts = () => {
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase()),
-    );
-    return filteredContacts;
-  };
-
   return (
     <div className="App">
       <h1 className="title">Phonebook</h1>
       <ContactForm />
       <h2 className="title">Contacts</h2>
-      <Filter filter={filter} findName={setFilter} />
-      <ContactList showFilteredContacts={showFilteredContacts} />
+      <Filter />
+      <ContactList />
     </div>
   );
 }

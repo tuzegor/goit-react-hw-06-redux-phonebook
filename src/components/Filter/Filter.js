@@ -1,8 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import style from './Filter.module.css';
 
-function Filter({ filter, findName }) {
+import style from './Filter.module.css';
+import { changeFilter } from '../../store/contacts/filter-slice';
+import { useDispatch, useSelector } from 'react-redux';
+
+function Filter() {
+  const dispatch = useDispatch();
+  const filter = useSelector(state => state.contacts.filter);
   return (
     <div className={style.filter}>
       <label className={style.item}>
@@ -11,16 +15,10 @@ function Filter({ filter, findName }) {
           className={style.field}
           type="text"
           value={filter}
-          onChange={e => findName(e.target.value)}
+          onChange={e => dispatch(changeFilter(e.target.value))}
         />
       </label>
     </div>
   );
 }
-
-Filter.propTypes = {
-  filter: PropTypes.string,
-  findName: PropTypes.func,
-};
-
 export default Filter;

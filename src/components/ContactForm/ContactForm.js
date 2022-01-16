@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import style from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, setState } from '../../store/contacts/items-slice';
+import { addContact } from '../../store/contacts/items-slice';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
@@ -10,7 +10,7 @@ export default function ContactForm() {
 
   const dispatch = useDispatch();
 
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.items);
   console.log(contacts);
 
   const formSubmit = event => {
