@@ -1,16 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 import style from './ContactForm.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact, setState } from '../../store/contacts/items-slice';
 
-export default function ContactForm({ submitContact }) {
+export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const dispatch = useDispatch();
+
+  const contacts = useSelector(state => state.contacts);
+  console.log(contacts);
 
   const formSubmit = event => {
     event.preventDefault();
     const contact = { id: nanoid(), name, number };
-    submitContact(contact);
+
+    if (
+      contacts.find(
+        сontactItem =>
+          сontactItem.name.toLowerCase() === contact.name.toLowerCase(),
+      )
+    ) {
+      alert('Such contact exists');
+    } else {
+      dispatch(addContact(contact));
+    }
+
     setName('');
     setNumber('');
   };
@@ -53,7 +70,3 @@ export default function ContactForm({ submitContact }) {
     </form>
   );
 }
-
-ContactForm.propTypes = {
-  submitContact: PropTypes.func,
-};
