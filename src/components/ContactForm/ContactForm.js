@@ -9,9 +9,7 @@ export default function ContactForm() {
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
-
   const contacts = useSelector(state => state.contacts.items);
-  console.log(contacts);
 
   const formSubmit = event => {
     event.preventDefault();
